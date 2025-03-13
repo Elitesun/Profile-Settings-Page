@@ -1,4 +1,5 @@
-import React from "react";
+"use client"
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { CiEdit } from "react-icons/ci";
@@ -20,6 +21,25 @@ const ProfileHeader: React.FC<UserProfileCardProps> = ({
   imageUrl = "https://randomuser.me/api/portraits/men/32.jpg",
   onEdit,
 }) => {
+  const [isEditing, setIsEditing] = useState(false);
+  const [profileImage, setProfileImage] = useState(imageUrl);
+
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setProfileImage(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleSubmit = () => {
+    setIsEditing(false);
+    // Here you would typically call an API to update the profile picture
+  };
+
   return (
     <div className="p-4">
       <h2 className="text-lg font-semibold text-gray-800 mb-4 md:mb-6">My Profile</h2>
@@ -27,12 +47,23 @@ const ProfileHeader: React.FC<UserProfileCardProps> = ({
       <div className="mb-6 md:mb-8 bg-white p-4 md:p-6 rounded-lg shadow-sm border border-gray-100">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-4">
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
-            <div className="w-16 h-16 rounded-full overflow-hidden bg-blue-100">
+            <div className="relative w-16 h-16 rounded-full overflow-hidden bg-blue-100">
               <img 
-                src={imageUrl} 
+                src={profileImage} 
                 alt="Profile Picture" 
                 className="w-full h-full object-cover"
               />
+              {isEditing && (
+                <label className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 cursor-pointer">
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleImageChange}
+                    className="hidden"
+                  />
+                  <span className="text-white text-xs">Change</span>
+                </label>
+              )}
             </div>
             <div>
               <h3 className="font-semibold text-gray-800">{UserName}</h3>
@@ -40,14 +71,23 @@ const ProfileHeader: React.FC<UserProfileCardProps> = ({
               <p className="text-gray-500 text-sm">{location}</p>
             </div>
           </div>
-          <Button
-            className="px-3 py-1.5 text-sm text-gray-600 bg-white border border-gray-200 rounded-md flex items-center gap-1 transition hover:bg-gray-50 hover:shadow-sm"
-            onClick={onEdit}
-            variant="outline"
-          >
-            Edit
-            <CiEdit className="text-sm" />
-          </Button>
+          {!isEditing ? (
+            <Button
+              className="px-3 py-1.5 text-sm text-gray-600 bg-white border border-gray-200 rounded-md flex items-center gap-1 transition hover:bg-gray-50 hover:shadow-sm"
+              onClick={() => setIsEditing(true)}
+              variant="outline"
+            >
+              Edit Photo
+              <CiEdit className="text-sm" />
+            </Button>
+          ) : (
+            <Button
+              className="px-3 py-1.5 text-sm text-blue-600 bg-blue-50 border border-blue-200 rounded-md transition hover:bg-blue-100"
+              onClick={handleSubmit}
+            >
+              Save
+            </Button>
+          )}
         </div>
       </div>
     </div>
