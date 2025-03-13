@@ -1,31 +1,10 @@
-import { AppSidebar } from "@/components/app-sidebar";
-import { Separator } from "@/components/ui/separator";
-import {
-  SidebarInset,
-  SidebarProvider,
-  SidebarTrigger,
-} from "@/components/ui/sidebar";
+import { Sidebar } from "@/components/Sidebar";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <SidebarProvider
-      style={
-        {
-          "--sidebar-width": "19rem",
-        } as React.CSSProperties
-      }
-    >
-      <AppSidebar />
-      <SidebarInset>
-        <header className="flex h-16 shrink-0 items-center gap-2 px-4">
-          <SidebarTrigger className="-ml-1" />
-          <Separator
-            orientation="vertical"
-            className="mr-2 data-[orientation=vertical]:h-4"
-          />
-        </header>
-        <main>{children}</main>
-      </SidebarInset>
-    </SidebarProvider>
+    <div className="container mx-auto px-4 py-6">
+      <h1 className="text-xl font-bold text-gray-800 mb-4 md:mb-6">Account Settings</h1>
+      <Sidebar>{children}</Sidebar>
+    </div>
   );
 }

@@ -7,6 +7,8 @@ interface UserProfileCardProps {
   UserName?: string;
   Occupation?: string;
   userInfo?: string;
+  location?: string;
+  imageUrl?: string;
   onEdit?: () => void;
 }
 
@@ -14,40 +16,39 @@ const ProfileHeader: React.FC<UserProfileCardProps> = ({
   UserName = "Alex Sunday",
   Occupation = "Software Engineer",
   userInfo = "User info",
+  location = "Leeds, United Kingdom",
+  imageUrl = "https://randomuser.me/api/portraits/men/32.jpg",
   onEdit,
 }) => {
   return (
     <div className="p-4">
-      <h2 className="text-xl font-semibold mb-4">My Profile</h2>
+      <h2 className="text-lg font-semibold text-gray-800 mb-4 md:mb-6">My Profile</h2>
 
-      <div className="relative flex items-center gap-4 border-2 border-gray-200 p-4 rounded-lg shadow-md">
-        {/* Profile Image */}
-        <div className="w-36 h-36 rounded-full overflow-hidden border-2 border-white shadow-lg">
-          <Image
-            src=""
-            alt="Profile Picture"
-            width={144}
-            height={144}
-            className="object-cover w-full h-full"
-          />
+      <div className="mb-6 md:mb-8 bg-white p-4 md:p-6 rounded-lg shadow-sm border border-gray-100">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-4">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+            <div className="w-16 h-16 rounded-full overflow-hidden bg-blue-100">
+              <img 
+                src={imageUrl} 
+                alt="Profile Picture" 
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <div>
+              <h3 className="font-semibold text-gray-800">{UserName}</h3>
+              <p className="text-gray-500 text-sm">{Occupation}</p>
+              <p className="text-gray-500 text-sm">{location}</p>
+            </div>
+          </div>
+          <Button
+            className="px-3 py-1.5 text-sm text-gray-600 bg-white border border-gray-200 rounded-md flex items-center gap-1 transition hover:bg-gray-50 hover:shadow-sm"
+            onClick={onEdit}
+            variant="outline"
+          >
+            Edit
+            <CiEdit className="text-sm" />
+          </Button>
         </div>
-
-        {/* User Info */}
-        <div className="flex flex-col gap-1">
-          <h3 className="text-lg font-semibold">{UserName}</h3>
-          <h4 className="text-gray-600">{Occupation}</h4>
-          <p className="text-sm text-gray-500">{userInfo}</p>
-        </div>
-
-        {/* Edit Button */}
-        <Button
-          className="absolute bottom-4 right-4"
-          onClick={onEdit}
-          variant="outline"
-        >
-          Edit
-          <CiEdit />
-        </Button>
       </div>
     </div>
   );
