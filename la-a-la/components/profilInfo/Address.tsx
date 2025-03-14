@@ -12,13 +12,13 @@ interface AddressProps {
   onEdit?: () => void;
 }
 
-const Address: React.FC<AddressProps> = ({
+const Address = ({
   country = "United Kingdom",
   cityState = "Leeds, East London",
   postalCode = "ER1 2354",
   taxId = "A54546756",
   onEdit,
-}) => {
+}: AddressProps) => {
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({
     country,
@@ -37,7 +37,7 @@ const Address: React.FC<AddressProps> = ({
 
   const handleSubmit = () => {
     setIsEditing(false);
-    // Here you would typically call an API to update the address
+    
   };
 
   return (

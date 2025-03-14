@@ -1,7 +1,7 @@
 import React from "react";
-import ProfileHeader from "@/components/ProfileHeader";
-import PersonnalInfo from "@/components/PersonnalInfo";
-import Address from "@/components/Address";
+import ProfileHeader from "@/components/profilInfo/ProfileHeader";
+import PersonnalInfo from "@/components/profilInfo/PersonnalInfo";
+import Address from "@/components/profilInfo/Address";
 
 const page = () => {
   return (
