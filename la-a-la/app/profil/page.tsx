@@ -5,7 +5,7 @@ import Address from "@/components/profilInfo/Address";
 
 const page = () => {
   return (
-    <section>
+    <section className="bg-gray-50 p-6 rounded-2xl">
       <ProfileHeader />
       <PersonnalInfo />
       <Address />

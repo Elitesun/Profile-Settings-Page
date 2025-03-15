@@ -37,11 +37,10 @@ const ProfileHeader: React.FC<UserProfileCardProps> = ({
 
   const handleSubmit = () => {
     setIsEditing(false);
-    // Here you would typically call an API to update the profile picture
   };
 
   return (
-    <div className="p-4">
+    <div className="p-2">
       <h2 className="text-lg font-semibold text-gray-800 mb-4 md:mb-6">My Profile</h2>
 
       <div className="mb-6 md:mb-8 bg-white p-4 md:p-6 rounded-lg shadow-sm border border-gray-100">
@@ -77,7 +76,7 @@ const ProfileHeader: React.FC<UserProfileCardProps> = ({
               onClick={() => setIsEditing(true)}
               variant="outline"
             >
-              Edit Photo
+              Edit
               <CiEdit className="text-sm" />
             </Button>
           ) : (

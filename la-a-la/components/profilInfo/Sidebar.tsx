@@ -1,5 +1,6 @@
+"use client"
 import React from 'react';
-
+import { usePathname } from 'next/navigation';
 interface SidebarProps {
     children?: React.ReactNode;
 }
@@ -7,14 +8,13 @@ interface SidebarProps {
 interface NavItem {
     href: string;
     label: string;
-    isActive?: boolean;
+
 }
 
 const navigationItems: NavItem[] = [
     {
         href: '/profil',
         label: 'My Profile',
-        isActive: true
     },
     {
         href: '/profil/security',
@@ -40,6 +40,8 @@ const navigationItems: NavItem[] = [
 ];
 
 export function Sidebar({children} : SidebarProps) {
+    const pathname = usePathname();
+
     return (
         <div className="flex flex-col md:flex-row min-h-screen">
             <aside className="w-full md:w-[19rem] bg-white border-r border-gray-200 p-4">
@@ -48,7 +50,7 @@ export function Sidebar({children} : SidebarProps) {
                         {navigationItems.map((item) => (
                             <a key={item.href}
                                 href={item.href}
-                                className={`py-2 px-4 font-medium rounded-lg whitespace-nowrap ${item.isActive ? 'bg-blue-50 text-blue-600' : 'text-gray-600 hover:bg-gray-100'}`}>
+                                className={`py-2 px-4 font-medium rounded-lg whitespace-nowrap ${pathname === item.href ? 'bg-blue-50 text-blue-600' : 'text-gray-600 hover:bg-gray-100'}`}>
                                 {item.label}
                             </a>
                         ))}
@@ -60,8 +62,8 @@ export function Sidebar({children} : SidebarProps) {
                     </div>
                 </nav>
             </aside>
-            <main className="flex-1 p-4 md:p-6">
-                <div className="w-full bg-gray-50 p-4 md:p-6 rounded-xl">
+            <main className="flex-1 md:p-6">
+                <div className="w-full p-4 rounded-xl">
                     {children}
                 </div>
             </main>
