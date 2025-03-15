@@ -3,28 +3,12 @@
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { CiEdit } from "react-icons/ci";
+import { utilisateur } from "@/data/Utilisateur";
 
-interface AddressProps {
-  country?: string;
-  cityState?: string;
-  postalCode?: string;
-  taxId?: string;
-  onEdit?: () => void;
-}
-
-const Address = ({
-  country = "United Kingdom",
-  cityState = "Leeds, East London",
-  postalCode = "ER1 2354",
-  taxId = "A54546756",
-  onEdit,
-}: AddressProps) => {
+const Address = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({
-    country,
-    cityState,
-    postalCode,
-    taxId,
+    address: utilisateur.address
   });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -63,61 +47,19 @@ const Address = ({
         )}
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-4 md:gap-x-8">
+      <div className="grid grid-cols-1 gap-y-4">
         <div>
-          <p className="text-sm text-gray-500 mb-1">Country</p>
+          <p className="text-sm text-gray-500 mb-1">Address</p>
           {isEditing ? (
             <input
               type="text"
-              name="country"
-              value={formData.country}
+              name="address"
+              value={formData.address}
               onChange={handleInputChange}
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             />
           ) : (
-            <p className="text-gray-700">{formData.country}</p>
-          )}
-        </div>
-        <div>
-          <p className="text-sm text-gray-500 mb-1">City/State</p>
-          {isEditing ? (
-            <input
-              type="text"
-              name="cityState"
-              value={formData.cityState}
-              onChange={handleInputChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            />
-          ) : (
-            <p className="text-gray-700">{formData.cityState}</p>
-          )}
-        </div>
-        <div>
-          <p className="text-sm text-gray-500 mb-1">Postal Code</p>
-          {isEditing ? (
-            <input
-              type="text"
-              name="postalCode"
-              value={formData.postalCode}
-              onChange={handleInputChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            />
-          ) : (
-            <p className="text-gray-700">{formData.postalCode}</p>
-          )}
-        </div>
-        <div>
-          <p className="text-sm text-gray-500 mb-1">TAX ID</p>
-          {isEditing ? (
-            <input
-              type="text"
-              name="taxId"
-              value={formData.taxId}
-              onChange={handleInputChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            />
-          ) : (
-            <p className="text-gray-700">{formData.taxId}</p>
+            <p className="text-gray-700">{formData.address}</p>
           )}
         </div>
       </div>
