@@ -17,14 +17,19 @@ confirmPassword: string;
 const PasswordInfo = ({ password = "alexSunday123",
 confirmPassword= "",
 }: Pass) =>{
+    // -----------------State for viewing the password or not ---------------------------------------- //
 const [showPassword , setShowPassword] = useState(false)
 const handleShowPassword = () => {
 setShowPassword(!showPassword)
 }
+
+// -----------------State for viewing the confirm password or not ---------------------------------------- //
 const [showConfirmPassword, setShowConfirmPassword] = useState(false)
 const handleShowConfirmPassword = () => {
     setShowConfirmPassword(!showConfirmPassword)
 }
+
+// State for editing password checking if password is valid and tracking the value of the password //
 const [isEditing , setIsEditing] = useState(false)
 const [isValid, setIsValid] = useState(false)
 const [formData, setFormData] = useState({
@@ -32,6 +37,7 @@ password,
 confirmPassword
 });
 
+// ---State for taking the input of the password and updating it accordingly //
 const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
