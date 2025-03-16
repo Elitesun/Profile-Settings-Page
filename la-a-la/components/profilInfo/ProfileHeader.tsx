@@ -2,28 +2,15 @@
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import { utilisateur } from "@/data/Utilisateur";
 import { CiEdit } from "react-icons/ci";
 
-interface UserProfileCardProps {
-  UserName?: string;
-  Occupation?: string;
-  userInfo?: string;
-  location?: string;
-  imageUrl?: string;
-  onEdit?: () => void;
-}
 
-const ProfileHeader: React.FC<UserProfileCardProps> = ({
-  UserName = "Alex Sunday",
-  Occupation = "Software Engineer",
-  userInfo = "User info",
-  location = "Leeds, United Kingdom",
+const ProfileHeader = ({
   imageUrl = "https://randomuser.me/api/portraits/men/32.jpg",
-  onEdit,
 }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [profileImage, setProfileImage] = useState(imageUrl);
-
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
@@ -65,9 +52,9 @@ const ProfileHeader: React.FC<UserProfileCardProps> = ({
               )}
             </div>
             <div>
-              <h3 className="font-semibold text-gray-800">{UserName}</h3>
-              <p className="text-gray-500 text-sm">{Occupation}</p>
-              <p className="text-gray-500 text-sm">{location}</p>
+              <h3 className="font-semibold text-gray-800">{utilisateur.firstName } { utilisateur.lastName}</h3>
+              <p className="text-gray-500 text-sm">{utilisateur.post}</p>
+              <p className="text-gray-500 text-sm">{utilisateur.address}</p>
             </div>
           </div>
           {!isEditing ? (

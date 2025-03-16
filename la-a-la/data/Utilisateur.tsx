@@ -1,10 +1,12 @@
-// Mock user data for development and testing
+
 
 export interface libelle {
   observation: string;
   action: string;
   approbation: string;
 }
+
+
 
 export interface User {
   _id: string;
@@ -43,3 +45,4 @@ export const utilisateur: User = {
   createdAt: "2024-11-27T12:00:00.000Z",
   updatedAt: "2024-11-27T12:00:00.000Z"
 };
+

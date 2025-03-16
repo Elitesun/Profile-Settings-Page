@@ -3,26 +3,12 @@ import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { CiEdit } from "react-icons/ci";
 
-interface PersonalInfoProps {
-  firstName?: string;
-  lastName?: string;
-  email?: string;
-  phone?: string;
-  bio?: string;
-  onEdit?: () => void;
-}
+import { utilisateur } from "@/data/Utilisateur";
 
-const PersonnalInfo: React.FC<PersonalInfoProps> = ({
-  firstName = "Rafiqur",
-  lastName = "Rahman",
-  email = "rafiqurrahman51@gmail.com",
-  phone = "+09 345 346 46",
-  bio = "Team Manager",
-  onEdit,
-}) => {
+const PersonnalInfo = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({
-    phone,
+    phone: utilisateur.phone,
   });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -35,7 +21,6 @@ const PersonnalInfo: React.FC<PersonalInfoProps> = ({
 
   const handleSubmit = () => {
     setIsEditing(false);
-    // Here you would typically call an API to update the phone number
   };
 
   return (
@@ -64,15 +49,15 @@ const PersonnalInfo: React.FC<PersonalInfoProps> = ({
       <div className="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-4 md:gap-x-8">
         <div>
           <p className="text-sm text-gray-500 mb-1">First Name</p>
-          <p className="text-gray-700">{firstName}</p>
+          <p className="text-gray-700">{utilisateur.firstName}</p>
         </div>
         <div>
           <p className="text-sm text-gray-500 mb-1">Last Name</p>
-          <p className="text-gray-700">{lastName}</p>
+          <p className="text-gray-700">{utilisateur.lastName}</p>
         </div>
         <div>
           <p className="text-sm text-gray-500 mb-1">Email address</p>
-          <p className="text-gray-700 break-words">{email}</p>
+          <p className="text-gray-700 break-words">{utilisateur.email}</p>
         </div>
         <div>
           <p className="text-sm text-gray-500 mb-1">Phone</p>
@@ -89,8 +74,8 @@ const PersonnalInfo: React.FC<PersonalInfoProps> = ({
           )}
         </div>
         <div className="col-span-1 md:col-span-2">
-          <p className="text-sm text-gray-500 mb-1">Bio</p>
-          <p className="text-gray-700">{bio}</p>
+          <p className="text-sm text-gray-500 mb-1">Post</p>
+          <p className="text-gray-700">{utilisateur.post}</p>
         </div>
       </div>
     </div>
