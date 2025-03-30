@@ -5,7 +5,7 @@ import AccessLevelInfo from '@/components/securityInfo/AccessLevelInfo'
 const page = () => {
   return (
     <div>
-      <PasswordInfo />
+      <PasswordInfo password="" confirmPassword="" />
       <AccessLevelInfo/>
     </div>
   )
